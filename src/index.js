@@ -52,7 +52,7 @@ app.get("/openpose", function (request, response) {
 
 app.get("/childpro", function (request, response) {
     //const ls = spawn('ls', ['-lh', '/usr'])
-    const ls = spawn('python3', ['/opt/ai08finalproject/function/Food_Recognition/predict.py', '-c', '/opt/ai08finalproject/function/Food_Recognition/config.json', '-i', '/opt/ai08finalproject/function/Food_Recognition/data/test/imgs/img_204.jpg', '-o', '/opt/ai08finalproject/function/Food_Recognition/data/output/']);
+    const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json', '-i', '/opt/ai08finallyproject/function/Food_Recognition/data/test/imgs/img_204.jpg', '-o', '/opt/ai08finallyproject/function/Food_Recognition/data/output/']);
     ls.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
     });
