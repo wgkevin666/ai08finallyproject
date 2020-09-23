@@ -37,39 +37,30 @@
 </div>
 
 <!-- class="form-group shadow mb-4" -->
-<div class="form-group">
-  <form name="form1" method="post" onsubmit="return formCheck()">
-    <label for="myphoto">
-      File input
-    </label>
-    <input type="file" accept="image/*" multiple id="myphoto" name="myphoto">
+<!-- <div class="form-group">
+  <form name="form1" onsubmit="return formCheck()">
+    <label for="food">File input</label>
+    <input type="file" accept="image/*" multiple id="food" name="food">
     <p class="help-block">
       Example block-level help text here.
     </p>
 </div>
-
 </form>
 
-<button type="submit" class="btn btn-outline-secondary">
-  Submit
-</button>
 
-
-<div id="imgs"></div>
-
-<!-- <div class="row">
+<div class="row">
   <img id="myimg" src="" alt="">
 </div> -->
 
 
-<!-- <div class="container-">
+
+
+<div class="container-">
   <div class="row">
     <div class="col-lg-6" id="upload">
       <div class="card-body">
         <h4 class="card-title">Custom File Upload</h4>
-        <h6 class="card-subtitle">To use add <code>.custom-file-input</code> class to the input
-        </h6>
-        <form onsubmit="return formcheck()">  
+        <form name="form1" onsubmit="return formCheck()">  
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Upload</span>
@@ -78,12 +69,8 @@
               <label class="custom-file-label" for="food">Choose file</label>
               <input type="file" class="custom-file-input" 
                      accept="image/*"
-                     id="food" name="food">
-              
+                     id="food" name="food">              
             </div>
-            <button type="submit" class="btn btn-outline-secondary">
-              Submit
-            </button>
           </div>
         </form>
       </div>
@@ -92,7 +79,7 @@
 </div>
 <div class="row">
   <img id="myimg" src="" alt="">
-</div> -->
+</div>
 
 <div class="col-lg-6">
   <div class="card">
@@ -332,20 +319,24 @@
 
       <script src="/js/jquery-3.5.1.js"></script>
       <script src="/bootstrap/js/bootstrap.bundle.js"></script>
-      <script>
+      <!-- <script>
+
+          console.log("loading page1")
         
             function formCheck(){
+              console.log("exec formCheck")
                 $.post(
-                    '/try-post',
+                    '/try-upload',
                     $(document.form1).serialize(),
                     function(data){
+                      console.log('ajax response OK')
                         console.log(data);
                 }, 'json')
                 return false;
             }
         
-      </script>
-      <!-- <script>
+      </script> -->
+      <script>
         function formCheck() {
           const fd = new FormData(document.form1);  //FormData就是一個表單但沒有外觀
           fetch('/try-upload', {
@@ -364,7 +355,7 @@
 
         food.addEventListener('change', formCheck)
       </script>
-            -->
+           
            
            <!-- <script>
               function formCheck() {
