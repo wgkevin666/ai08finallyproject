@@ -40,8 +40,8 @@ app.get("/", function (request, response) {
     //response.end("<h2>Hello Express Success</h2>");
 });
 
-app.get("/page1", function (request, response) {
-    response.render("page1");
+app.get("/Food_Recognition", function (request, response) {
+    response.render("Food_Recognition");
 })
 
 app.get("/childpro", function (request, response) {
