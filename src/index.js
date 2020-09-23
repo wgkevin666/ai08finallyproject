@@ -40,8 +40,14 @@ app.get("/", function (request, response) {
     //response.end("<h2>Hello Express Success</h2>");
 });
 
-app.get("/Food_Recognition", function (request, response) {
-    response.render("Food_Recognition");
+app.get("/food_recognition", function (request, response) {
+    response.render("food_recognition");
+})
+app.get("/speech", function (request, response) {
+    response.render("speech");
+})
+app.get("/openpose", function (request, response) {
+    response.render("openpose");
 })
 
 app.get("/childpro", function (request, response) {
@@ -93,7 +99,6 @@ app.get('/try-uuid', (req, res) => {
         b: uuidv4,
     });
 });
-
 
 app.post('/try-post', (req, res) => {
     req.body.加料 = '哈囉';

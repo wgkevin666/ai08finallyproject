@@ -47,10 +47,63 @@
 </div>
 </form>
 
-
 <div class="row">
   <img id="myimg" src="" alt="">
 </div> -->
+
+<div class="container">
+
+  <div class="row justify-content-around">
+    <div class="col-lg-7">
+      <img width="500px" height="350px" alt="Bootstrap Image Preview" src="/img/ai03.jpg" >
+    </div>
+
+
+    <div class="col-lg-5">
+      <div class="col-lg-6">
+        <h2><label for="validationCustom04">Gender</label></h2>
+        <select class="custom-select" id="validationCustom04" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid state.
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h2><label for="validationCustom04">Age</label></h2>
+        <select class="custom-select" id="validationCustom04" required>
+          <option selected disabled value="">Choose...</option>
+          <option>10~20</option>
+          <option>20~30</option>
+          <option>30~40</option>
+          <option>40~50</option>
+          <option>50~60</option>
+          <option>60~70</option>
+          <option>70~80</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid state.
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <h2><label for="validationCustom04">Level</label></h2>
+        <select class="custom-select" id="validationCustom04" required>
+          <option selected disabled value="">Choose...</option>
+          <option>Light</option>
+          <option>Normal</option>
+          <option>Hard</option>
+        </select>
+        <div class="invalid-feedback">
+          Please select a valid state.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -60,16 +113,14 @@
     <div class="col-lg-6" id="upload">
       <div class="card-body">
         <h4 class="card-title">Custom File Upload</h4>
-        <form name="form1" onsubmit="return formCheck()">  
+        <form name="form1" onsubmit="return formCheck()">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Upload</span>
             </div>
             <div class="custom-file">
               <label class="custom-file-label" for="food">Choose file</label>
-              <input type="file" class="custom-file-input" 
-                     accept="image/*"
-                     id="food" name="food">              
+              <input type="file" class="custom-file-input" accept="image/*" id="food" name="food">
             </div>
           </div>
         </form>
@@ -143,10 +194,6 @@
     </tbody>
   </table>
 </div>
-
-
-
-
 
 
 
@@ -291,41 +338,39 @@
 
 
 
-
-
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+        </div>
+        <div class="card-body">
+          <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20"
+              aria-valuemin="0" aria-valuemax="100"></div>
           </div>
-          <div class="card-body">
-            <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-            <div class="progress mb-4">
-              <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20"
-                aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-            <div class="progress mb-4">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40"
-                aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-            <div class="progress mb-4">
-              <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-            <div class="progress mb-4">
-              <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80"
-                aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-            <div class="progress">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
-                aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+          <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0"
+              aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
+          <div class="progress mb-4">
+            <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0"
+              aria-valuemax="100"></div>
+          </div>
+          <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
+              aria-valuemin="0" aria-valuemax="100"></div>
           </div>
         </div>
-      
+      </div>
+
 
       <script src="/js/jquery-3.5.1.js"></script>
       <script src="/bootstrap/js/bootstrap.bundle.js"></script>
@@ -353,21 +398,23 @@
             method: 'POST',
             body: fd
           })
-          .then(r => r.json()) //拿文字的話json改text
-          .then(obj => {
+            .then(r => r.json()) //拿文字的話json改text
+            .then(obj => {
               console.log(obj)
               myimg.src = "/img-uploads/" + obj.filename;
-          })
+            })
 
           return false;
         }
 
-
         food.addEventListener('change', formCheck)
+
+
+        $('.dropdown-toggle').dropdown();
       </script>
-           
-           
-           <!-- <script>
+
+
+      <!-- <script>
               function formCheck() {
                 const fd = new FormData(document.form1);  //FormData就是一個表單但沒有外觀
                 fetch('/try-upload-multi', {
