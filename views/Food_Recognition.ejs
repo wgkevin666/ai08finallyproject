@@ -55,51 +55,61 @@
 
   <div class="row justify-content-around">
     <div class="col-lg-7">
-      <img width="500px" height="350px" alt="Bootstrap Image Preview" src="/img/ai03.jpg" >
+      <img width="500px" height="350px" alt="Bootstrap Image Preview" src="/img/ai03.jpg">
     </div>
 
 
     <div class="col-lg-5">
-      <div class="col-lg-6">
+      <div class="col-lg-6 mt-2">
         <h2><label for="validationCustom04">Gender</label></h2>
-        <select class="custom-select" id="validationCustom04" required>
+        <select class="custom-select" id="gender_sel" required>
           <option selected disabled value="">Choose...</option>
-          <option>Male</option>
-          <option>Female</option>
+          <option value="m">Male</option>
+          <option value="f">Female</option>
         </select>
         <div class="invalid-feedback">
           Please select a valid state.
         </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-6 mt-2">
         <h2><label for="validationCustom04">Age</label></h2>
-        <select class="custom-select" id="validationCustom04" required>
+        <select class="custom-select" id="age_sel" required>
           <option selected disabled value="">Choose...</option>
-          <option>10~20</option>
-          <option>20~30</option>
-          <option>30~40</option>
-          <option>40~50</option>
-          <option>50~60</option>
-          <option>60~70</option>
-          <option>70~80</option>
+          <option value="15">10~20</option>
+          <option value="25">20~30</option>
+          <option value="35">30~40</option>
+          <option value="45">40~50</option>
+          <option value="55">50~60</option>
+          <option value="65">60~70</option>
+          <option value="75">70~80</option>
         </select>
         <div class="invalid-feedback">
           Please select a valid state.
         </div>
       </div>
 
-      <div class="col-lg-6">
+      <div class="col-lg-6 mt-2">
         <h2><label for="validationCustom04">Level</label></h2>
-        <select class="custom-select" id="validationCustom04" required>
+        <select class="custom-select" id="level_sel" required>
           <option selected disabled value="">Choose...</option>
-          <option>Light</option>
-          <option>Normal</option>
-          <option>Hard</option>
+          <option value="1">Light</option>
+          <option value="2">Normal</option>
+          <option value="3">Hard</option>
         </select>
         <div class="invalid-feedback">
           Please select a valid state.
         </div>
+      </div>
+
+      <div class="col-lg-6 mt-2">
+        <h2><label for="validationCustom04">可消耗熱量 :</label></h2>
+        <u><div class="row justify-content-center text-warning h3" id="my_info"></div></u>
+      </div>
+
+      <div class="col-lg-6 mt-2">
+        <h2><label for="validationCustom04">總熱量 :</label></h2>
+        <u><div class="row justify-content-center text-danger h3" id="my_lastinfo"></div></u>
       </div>
     </div>
   </div>
@@ -131,8 +141,6 @@
 <div class="row">
   <img id="myimg" src="" alt="">
 </div>
-
-
 
 
 <h2>食物資料</h2>
@@ -196,8 +204,6 @@
 </div>
 
 
-
-
 <div class="col-lg-6">
   <div class="card">
     <div class="card-body">
@@ -237,8 +243,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <div class="container-fluid">
@@ -334,8 +338,6 @@
           </tr>
         </tbody>
       </table>
-
-
 
 
       <div class="card shadow mb-4">
@@ -441,4 +443,30 @@
 
 
       <%- include("parts/scripts") %>
+
+      <script>
+        const gender_sel = $('#gender_sel');
+        const age_sel = $('#age_sel');
+        const level_sel = $('#level_sel');
+        
+
+        $('.custom-select').change(function () {
+
+          const g = gender_sel.val();
+          const a = age_sel.val();
+          const l = level_sel.val();
+
+          let h = g === 'm' ? 100 : 80;
+
+          h += a * 2;
+          h += l * 200;
+
+          $('#my_info').html(h + "卡");
+          $('#my_lastinfo').html(2000 - h + "卡");
+        });
+
+
+
+      </script>
+
       <%- include("parts/html-foot") %>

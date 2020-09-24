@@ -21,9 +21,6 @@ const router = express.Router();
 
 const sessionStore = new MySQLstore({}, db);
 
-
-//const admin2Router = require(__dirname + '/routes/admin2');
-//app.use(admin2Router);
 app.use('/admins', require(__dirname + '/routes/admin2'));
 
 // app.get('/test', async (req,res)=>{
@@ -86,7 +83,23 @@ app.get("/childpro", function (request, response) {
 app.post('/try-upload', upload.single('food'), (req, res) => {
 
 
-    res.json(req.file);
+    //res.json(req.file);
+
+    const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json', 
+    '-i', req.file.path, 
+    '-o', '/opt/ai08finallyproject/function/Food_Recognition/data/output/']);
+    ls.stdout.on('data', (data) => {
+        console.log(`stdout: ${data}`);
+    });
+
+    ls.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
+
+    ls.on('close', (code) => {
+        console.log(`child process exited with code ${code}`);
+        res.json(req.file);
+    });
 });
 app.post('/try-upload-multi', upload.array('myphoto', 10), (req, res) => {
     res.json(req.files);
@@ -100,10 +113,6 @@ app.get('/try-uuid', (req, res) => {
     });
 });
 
-app.post('/try-post', (req, res) => {
-    req.body.加料 = '哈囉';
-    res.json(req.body);
-});
 
 // app.get("/login",function(request,response){
 //     response.render("login");
