@@ -9,9 +9,11 @@ import jieba
 from gtts import gTTS
 from pygame import mixer
 import tempfile
+import time
+import wave
 
 
-# In[ ]:
+# In[2]:
 
 
 def speak(sentence, lang):
@@ -29,14 +31,23 @@ def Voice_To_Text():
         audio = r.listen(source)
     try:
         Text = r.recognize_google(audio, language="zh-TW")
-    except r.UnknowValueError:
+    except r.UnknownValueError:
         Text = "無法翻譯"
-    except sr.RequestError as e:
+    except speech_recognition.RequestError as e:
         Text = "無法翻譯{0}".format(e)
+    return Text
+def Audio_To_Text():
+    r = speech_recognition.Recognizer()
+    with speech_recognition.WavFile("rec0925-154053.wav") as source:
+        audio = r.record(source)
+    try:
+        Text = r.recognize_google(audio, language="zh-TW")
+    except LookupError:
+        Text = "無法翻譯"
     return Text
 
 
-# In[2]:
+# In[ ]:
 
 
 Text = Voice_To_Text()
@@ -45,6 +56,7 @@ print(textList)
 if "頭" in textList:
     print('告訴我詳細一點, 例如有什麼症狀')
     speak('告訴我詳細一點, 例如有什麼症狀', 'zh-tw')
+    time.sleep(5)
     Text = Voice_To_Text()
     textList = jieba.lcut(Text, cut_all=True, HMM=True)
     print(textList)
@@ -61,17 +73,8 @@ if "頭" in textList:
         speak('可能症狀為【偏頭痛】建議直接到附近的診所就醫', 'zh-tw')
         print('可能症狀為【偏頭痛】建議直接到附近的診所就醫')
     elif "藥" in textList:
-        speak('剛剛有喝酒、空間太封閉等等嗎', 'zh-tw')
-        print('剛剛有喝酒、空間太封閉等等嗎')
-        Text = Voice_To_Text()
-        textList = jieba.lcut(Text, cut_all=True, HMM=True)
-        print(textList)
-        if '沒' in textList:
-            speak('可能症狀為【藥物濫用】建議暫時停止用藥', 'zh-tw')
-            print('可能症狀為【藥物濫用】建議暫時停止用藥')
-        else:
-            speak('可能症狀為【偏頭痛】建議直接到附近的診所就醫', 'zh-tw')
-            print('可能症狀為【偏頭痛】建議直接到附近的診所就醫')
+        speak('可能症狀為【藥物濫用】建議暫時停止用藥', 'zh-tw')
+        print('可能症狀為【藥物濫用】建議暫時停止用藥')
     elif "鼻水" in textList:
         speak('可能症狀為【叢發性頭痛】建議預備類固醇藥物、避免含硝酸鹽的食物', 'zh-tw')
         print('可能症狀為【叢發性頭痛】建議預備類固醇藥物、避免含硝酸鹽的食物')
@@ -180,9 +183,13 @@ if "頭" in textList:
     elif "胃" in textList:
         speak('可能症狀為【消化系統導致的頭痛】建議注意消化系統問題，改善飲食生活習慣', 'zh-tw')
         print('可能症狀為【消化系統導致的頭痛】建議注意消化系統問題，改善飲食生活習慣')
-if "肚子" or "胃" in textList:
+    else:
+        speak('建議直接到附近的診所就醫', 'zh-tw')
+        print('建議直接到附近的診所就醫')
+elif "肚子" or "胃" in textList:
     speak('告訴我詳細一點, 例如有什麼症狀及位置', 'zh-tw')
     print('告訴我詳細一點, 例如有什麼症狀及位置')
+    time.sleep(5)
     Text = Voice_To_Text()
     textList = jieba.lcut(Text, cut_all=True, HMM=True)
     print(textList)
