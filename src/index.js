@@ -87,7 +87,7 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
 
     const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json', 
     '-i', req.file.path, 
-    '-o', '/opt/ai08finallyproject/function/Food_Recognition/data/output/']);
+    '-o', '/opt/ai08finallyproject/public/img-downloads/']);
     ls.stdout.on('data', (data) => {
         console.log(`stdout: ${data}`);
     });
@@ -97,8 +97,15 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
     });
 
     ls.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-        res.json(req.file);
+//	   res.json('/opt/ai08finallyproject/public/img-downloads/' + req.file.filename);
+//        console.log(`child process exited with code ${code}`);
+//        res_img = Object.assign({}, req.file)
+//	console.log(req.file)
+//	console.log(typeof(req.file))
+//	res_img['path'].replace('img-uploads', 'img-downloads')
+//	res_img['destination'].replace('img-uploads', 'img-downloads')
+//	console.log(res_img)
+	res.json(req.file);
     });
 });
 app.post('/try-upload-multi', upload.array('myphoto', 10), (req, res) => {

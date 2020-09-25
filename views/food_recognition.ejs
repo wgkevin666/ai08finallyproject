@@ -403,7 +403,7 @@
             .then(r => r.json()) //拿文字的話json改text
             .then(obj => {
               console.log(obj)
-              myimg.src = "/img-uploads/" + obj.filename;
+              myimg.src = "/img-downloads/" + obj.filename;
             })
 
           return false;
