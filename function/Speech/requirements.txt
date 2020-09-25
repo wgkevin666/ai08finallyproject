@@ -1,0 +1,5 @@
+speechrecognition
+jieba
+gtts
+pygmae
+pyaudio
