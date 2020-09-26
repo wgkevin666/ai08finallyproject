@@ -76,13 +76,13 @@
         <h2><label for="validationCustom04">Age</label></h2>
         <select class="custom-select" id="age_sel" required>
           <option selected disabled value="">Choose...</option>
-          <option value="15">10~20</option>
-          <option value="25">20~30</option>
-          <option value="35">30~40</option>
-          <option value="45">40~50</option>
-          <option value="55">50~60</option>
-          <option value="65">60~70</option>
-          <option value="75">70~80</option>
+          <option value="500">10~20</option>
+          <option value="300">20~30</option>
+          <option value="200">30~40</option>
+          <option value="100">40~50</option>
+          <option value="50">50~60</option>
+          <option value="50">60~70</option>
+          <option value="50">70~80</option>
         </select>
         <div class="invalid-feedback">
           Please select a valid state.
@@ -139,7 +139,7 @@
   </div>
 </div>
 <div class="row">
-  <img id="myimg" src="" alt="">
+  <img id="myimg" width="100%" src="" alt="">
 </div>
 
 
@@ -453,18 +453,19 @@
         $('.custom-select').change(function () {
 
           const g = gender_sel.val();
-          const a = age_sel.val();
+          //const a = age_sel.val();
+          const a = age_sel.val() ? parseInt(age_sel.val()) : 0 ;
           const l = level_sel.val();
 
-          let h = g === 'm' ? 100 : 80;
+          let cal = g === 'm' ? 2000 : 1500;
+                    
+          cal += a ;
+          cal += l * 200;
 
-          h += a * 2;
-          h += l * 200;
 
-          $('#my_info').html(h + "卡");
-          $('#my_lastinfo').html(2000 - h + "卡");
+          $('#my_info').html(cal + "卡");
+          $('#my_lastinfo').html(2000 - cal + "卡");
         });
-
 
 
       </script>
