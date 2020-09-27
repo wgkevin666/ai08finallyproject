@@ -103,14 +103,14 @@
       </div>
 
       <div class="col-lg-6 mt-2">
-        <h2><label for="validationCustom04">可消耗熱量 :</label></h2>
+        <h2><label for="validationCustom04">可吸收熱量 :</label></h2>
         <u>
           <div class="row justify-content-center text-warning h3" id="my_info"></div>
         </u>
       </div>
 
       <div class="col-lg-6 mt-2">
-        <h2><label for="validationCustom04">總熱量 :</label></h2>
+        <h2><label for="validationCustom04">剩餘熱量 :</label></h2>
         <u>
           <div class="row justify-content-center text-danger h3" id="my_lastinfo"></div>
         </u>
@@ -456,7 +456,7 @@
 
 
           $('#my_info').html(cal + "卡");
-          $('#my_lastinfo').html(2000 - cal + "卡");
+          $('#my_lastinfo').html(cal - '#fat' + "卡");
         });
 
 
