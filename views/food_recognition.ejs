@@ -24,41 +24,166 @@
   } */
 </style>
 
-
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Punny headline</h1>
-    <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with
-      this example based on Apple’s marketing pages.</p>
-    <a class="btn btn-outline-secondary" href="#">Coming soon</a>
-  </div>
-  <div class="product-device shadow-sm d-none d-md-block"></div>
-  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+<div class="row justify-content-center mt-4">
+  <img width="800px" height="450px" alt="Image" src="/img/ai03.jpg">
 </div>
 
-<!-- class="form-group shadow mb-4" -->
-<!-- <div class="form-group">
-  <form name="form1" onsubmit="return formCheck()">
-    <label for="food">File input</label>
-    <input type="file" accept="image/*" multiple id="food" name="food">
-    <p class="help-block">
-      Example block-level help text here.
-    </p>
-</div>
-</form>
-
-<div class="row">
-  <img id="myimg" src="" alt="">
-</div> -->
-
-<div class="container">
-
-  <div class="row justify-content-around">
-    <div class="col-lg-7">
-      <img width="500px" height="350px" alt="Bootstrap Image Preview" src="/img/ai03.jpg">
+<div class="container mt-5">
+ 
+  <div class="row justify-content-between">
+    <div class="col-lg-6">
+      <div class="card-body">
+        <h4 class="card-title">Custom File Upload</h4>
+        <form name="form1" onsubmit="return formCheck()">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Upload</span>
+            </div>
+            <div class="custom-file">
+              <label class="custom-file-label" for="food">Choose file</label>
+              <input type="file" class="custom-file-input" accept="image/*" id="food" name="food">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <img id="myimg" width="100%" src="" alt="">
+      </div>
     </div>
 
+    
+    <div class="col-lg-6"> 
+      <h3>食物資料</h3>   
+        <table id='nutri' class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>熱量</th>
+              <th>蛋白質</th>
+              <th>脂肪</th>
+              <th>碳水化合物</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-warning">
+              <td id="fat"></td>
+              <td id="carbs"></td>
+              <td id="protein"></td>
+              <td id="cal"></td>
+            </tr>
+          </tbody>
+        </table>    
+    </div>
+  </div>
+</div>
 
+
+<div class="col ml-5">
+<div class="col-lg-4 mt-2">
+  <h2><label for="validationCustom04">Gender</label></h2>
+  <select class="custom-select" id="gender_sel" required>
+    <option selected disabled value="">Choose...</option>
+    <option value="m">Male</option>
+    <option value="f">Female</option>
+  </select>
+</div>
+
+<div class="col-lg-4 mt-2">
+  <h2><label for="validationCustom04">Age</label></h2>
+  <select class="custom-select" id="age_sel" required>
+    <option selected disabled value="">Choose...</option>
+    <option value="500">10~20</option>
+    <option value="300">20~30</option>
+    <option value="200">30~40</option>
+    <option value="100">40~50</option>
+    <option value="50">50~60</option>
+    <option value="50">60~70</option>
+    <option value="50">70~80</option>
+  </select>
+</div>
+
+<div class="col-lg-4 mt-2">
+  <h2><label for="validationCustom04">Level</label></h2>
+  <select class="custom-select" id="level_sel" required>
+    <option selected disabled value="">Choose...</option>
+    <option value="1">Light</option>
+    <option value="2">Normal</option>
+    <option value="3">Hard</option>
+  </select>
+</div>
+
+<div class="col-lg-6 mt-2">
+  <h2><label for="validationCustom04">可吸收熱量 :</label></h2>
+  <u>
+    <div class="row justify-content-center text-warning h3" id="my_info"></div>
+  </u>
+</div>
+
+<div class="col-lg-6 mt-2">
+  <h2><label for="validationCustom04">剩餘熱量 :</label></h2>
+  <u>
+    <div class="row justify-content-center text-danger h3" id="my_lastinfo"></div>
+  </u>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 
+<div class="container-">
+  <div class="row">
+    <div class="col-lg-6" id="upload">
+      <div class="card-body">
+        <h4 class="card-title">Custom File Upload</h4>
+        <form name="form1" onsubmit="return formCheck()">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Upload</span>
+            </div>
+            <div class="custom-file">
+              <label class="custom-file-label" for="food">Choose file</label>
+              <input type="file" class="custom-file-input" accept="image/*" id="food" name="food">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <img id="myimg" width="100%" src="" alt="">
+</div> -->
+<!-- 
+<div class="container">
+  <h2>食物資料</h2>
+  <div class="row justify-content-between">
+    <div class="col-lg-7">
+      <table id='nutri' class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th>熱量</th>
+            <th>蛋白質</th>
+            <th>脂肪</th>
+            <th>碳水化合物</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="fat"></td>
+            <td id="carbs"></td>
+            <td id="protein"></td>
+            <td id="cal"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+
+<!-- 
     <div class="col-lg-5">
       <div class="col-lg-6 mt-2">
         <h2><label for="validationCustom04">Gender</label></h2>
@@ -107,9 +232,9 @@
         <u>
           <div class="row justify-content-center text-warning h3" id="my_info"></div>
         </u>
-      </div>
+      </div> -->
 
-      <div class="col-lg-6 mt-2">
+      <!-- <div class="col-lg-6 mt-2">
         <h2><label for="validationCustom04">剩餘熱量 :</label></h2>
         <u>
           <div class="row justify-content-center text-danger h3" id="my_lastinfo"></div>
@@ -117,110 +242,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-
-
-
-<div class="container-">
-  <div class="row">
-    <div class="col-lg-6" id="upload">
-      <div class="card-body">
-        <h4 class="card-title">Custom File Upload</h4>
-        <form name="form1" onsubmit="return formCheck()">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Upload</span>
-            </div>
-            <div class="custom-file">
-              <label class="custom-file-label" for="food">Choose file</label>
-              <input type="file" class="custom-file-input" accept="image/*" id="food" name="food">
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <img id="myimg" width="100%" src="" alt="">
-</div>
-
-
-<h2>食物資料</h2>
-<div class="table-responsive">
-  <table id='nutri' class="table table-striped table-sm">
-    <thead>
-      <tr>
-        <th>熱量</th>
-        <th>蛋白質</th>
-        <th>脂肪</th>
-        <th>碳水化合物</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td id="fat"></td>
-        <td id="carbs"></td>
-        <td id="protein"></td>
-        <td id="cal"></td>
-      </tr>
-      <tr>
-        <td>consectetur</td>
-        <td>adipiscing</td>
-        <td>elit</td>
-        <td>sit</td>
-      </tr>
-      <tr>
-        <td>nec</td>
-        <td>odio</td>
-        <td>Praesent</td>
-        <td>sit</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<div class="col-lg-6">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Striped Table</h5>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 <div class="container-fluid">
