@@ -145,7 +145,7 @@
 
 <h2>食物資料</h2>
 <div class="table-responsive">
-  <table class="table table-striped table-sm">
+  <table id='nutri' class="table table-striped table-sm">
     <thead>
       <tr>
         <th>#</th>
@@ -404,6 +404,16 @@
             .then(obj => {
               console.log(obj)
               myimg.src = "/img-downloads/" + obj.filename;
+		
+		console.log(obj.data)
+		d = obj.data.match(/{.+}/)[0].replaceAll("\'", '"')
+		console.log(d)
+		d = JSON.parse(d)
+		console.log(d)
+		console.log(d.total_fat)
+
+		console.log(document.querySelector('#nutri tbody tr td').innerText)
+		document.querySelector("#nutri tbody tr td").innerText = d.total_fat
             })
 
           return false;

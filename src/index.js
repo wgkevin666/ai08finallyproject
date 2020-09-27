@@ -74,7 +74,7 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
     '-i', req.file.path, 
     '-o', '/opt/ai08finallyproject/public/img-downloads/']);
     
-    result = ''
+    d = ''
 
     ls.stdout.on('data', (data) => {
 //	result += data
@@ -103,7 +103,11 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
 //	res_img['path'].replace('img-uploads', 'img-downloads')
 //	res_img['destination'].replace('img-uploads', 'img-downloads')
 //	console.log(res_img)
-	res.json(req.file);
+	response = {
+		filename: req.file.filename,
+		data: d
+	}
+	res.json(response);
     });
 });
 app.post('/try-upload-multi', upload.array('myphoto', 10), (req, res) => {
