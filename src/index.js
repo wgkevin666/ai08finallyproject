@@ -70,22 +70,22 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
 
     //res.json(req.file);
 
-    const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict_show_fat.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json', 
-    '-i', req.file.path, 
-    '-o', '/opt/ai08finallyproject/public/img-downloads/']);
-    
+    const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict_show_fat.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json',
+        '-i', req.file.path,
+        '-o', '/opt/ai08finallyproject/public/img-downloads/']);
+
     d = ''
 
     ls.stdout.on('data', (data) => {
-//	result += data
+        //	result += data
         console.log(`[Nodejs] stdout: ${data}`);
-	d = data.toString().split('\n')
-	console.log(`[LIST] ${d}`)
-	d = d.slice(-2)
-	console.log(`[SLICE] ${d}`)
-	d = JSON.stringify(d)
-	console.log(`[JSON Object] ${d}`)
-//	res.json(`[LIST] ${d}`);
+        d = data.toString().split('\n')
+        console.log(`[LIST] ${d}`)
+        d = d.slice(-2)
+        console.log(`[SLICE] ${d}`)
+        d = JSON.stringify(d)
+        console.log(`[JSON Object] ${d}`)
+        //	res.json(`[LIST] ${d}`);
     });
 
     ls.stderr.on('data', (data) => {
@@ -93,23 +93,24 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
     });
 
     ls.on('close', (code) => {
-//	result = result.split('\n')
-	//console.log('[RESULT] ' + result)
-//	   res.json('/opt/ai08finallyproject/public/img-downloads/' + req.file.filename);
-//        console.log(`child process exited with code ${code}`);
-//        res_img = Object.assign({}, req.file)
-//	console.log(req.file)
-//	console.log(typeof(req.file))
-//	res_img['path'].replace('img-uploads', 'img-downloads')
-//	res_img['destination'].replace('img-uploads', 'img-downloads')
-//	console.log(res_img)
-	response = {
-		filename: req.file.filename,
-		data: d
-	}
-	res.json(response);
+        //	result = result.split('\n')
+        //console.log('[RESULT] ' + result)
+        //	   res.json('/opt/ai08finallyproject/public/img-downloads/' + req.file.filename);
+        //        console.log(`child process exited with code ${code}`);
+        //        res_img = Object.assign({}, req.file)
+        //	console.log(req.file)
+        //	console.log(typeof(req.file))
+        //	res_img['path'].replace('img-uploads', 'img-downloads')
+        //	res_img['destination'].replace('img-uploads', 'img-downloads')
+        //	console.log(res_img)
+        response = {
+            filename: req.file.filename,
+            data: d
+        }
+        res.json(response);
     });
 });
+
 app.post('/try-upload-multi', upload.array('myphoto', 10), (req, res) => {
     res.json(req.files);
 });
