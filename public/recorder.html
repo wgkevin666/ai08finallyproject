@@ -1,0 +1,89 @@
+<!-- https://developers.google.com/web/fundamentals/media/recording-audio?hl=zh-tw -->
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recorder</title>
+</head>
+<body>
+    <a id="download">Download
+    <button id="stop">Stop
+    <script>
+        let shouldStop = false;
+        let stopped = false;
+        const downloadLink = document.getElementById('download');
+        const stopButton = document.getElementById('stop');
+        console.log('shouldStop: ', shouldStop, 'stopped: ', stopped)
+
+
+        
+        var handleSuccess = function (stream) {
+            const options = {
+                // mimeType: 'video/webm;codecs=vp9' 
+                mimeType: 'audio/webm; codecs=Opus',
+                // audioBitsPerSecond: 44100 * 16,
+                };
+            const recordedChunks = [];
+            const mediaRecorder = new MediaRecorder(stream, options);
+
+            // https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder/ondataavailable
+            // https://ithelp.ithome.com.tw/articles/10200758
+            // https://ithelp.ithome.com.tw/articles/10200335
+            // https://stackoverflow.com/questions/41739837/all-mime-types-supported-by-mediarecorder-in-firefox-and-chrome
+            // https://www.crifan.com/js_mediarecorder_record_support_type/
+            mediaRecorder.addEventListener('dataavailable', function (e) {
+                console.log('ondataavailable')
+                if (e.data.size > 0) {
+                    recordedChunks.push(e.data);
+                }
+
+                if (shouldStop === true && stopped === false) {
+                    // mediaRecorder.stop();
+                    stopped = true;
+                }
+            });
+
+            mediaRecorder.addEventListener('stop', function () {
+                downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                downloadLink.download = 'acetest.mp3';
+            });
+
+            mediaRecorder.start();
+
+            stopButton.addEventListener('click', function () {
+                shouldStop = true;
+                console.log('shouldStop: ', shouldStop, 'stopped: ', stopped)
+                mediaRecorder.stop()
+            })
+
+        };
+
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+            .then(handleSuccess);
+
+    </script>
+    <script>
+        navigator.permissions.query({ name: 'microphone' }).then(function (result) {
+                if (result.state == 'granted') {
+                    console.log('granted')
+                } else if (result.state == 'prompt') {
+                    console.log('prompt')
+                } else if (result.state == 'denied') {
+                    console.log('denied')
+                }
+                result.onchange = function () {
+
+                };
+            });
+        // navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+        //         if (result.state === 'granted') {
+        //             showMap();
+        //         } else if (result.state === 'prompt') {
+        //             showButtonToEnableMap();
+        //         }
+        //         // 如果被拒绝，请不要做任何操作。
+        //     });
+    </script> -->
+</body>
+</html>
