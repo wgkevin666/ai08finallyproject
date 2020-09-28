@@ -70,7 +70,7 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
 
     //res.json(req.file);
 
-    const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict_show_fat.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json',
+    const ls = spawn('python3', ['/opt/ai08finallyproject/function/Food_Recognition/predict.py', '-c', '/opt/ai08finallyproject/function/Food_Recognition/config.json',
         '-i', req.file.path,
         '-o', '/opt/ai08finallyproject/public/img-downloads/']);
 
