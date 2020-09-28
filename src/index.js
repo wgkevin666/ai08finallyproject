@@ -111,6 +111,11 @@ app.post('/try-upload', upload.single('food'), (req, res) => {
     });
 });
 
+app.post('/try-upload-wav', upload.single('voice'), (req, res)=>{
+    res.json(req.file);
+});
+
+
 app.post('/try-upload-multi', upload.array('myphoto', 10), (req, res) => {
     res.json(req.files);
 });
@@ -194,6 +199,6 @@ app.use(express.static('public'));
 app.use(function (request, response) {
     response.status(404).send("<h2>找不到頁面</h2>");
 });
-app.listen(3000, function () {
+app.listen(5000, function () {
     console.log("Server Started");
 });
