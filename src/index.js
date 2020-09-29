@@ -199,6 +199,6 @@ app.use(express.static('public'));
 app.use(function (request, response) {
     response.status(404).send("<h2>找不到頁面</h2>");
 });
-app.listen(5000, function () {
+app.listen(3000, function () {
     console.log("Server Started");
 });
