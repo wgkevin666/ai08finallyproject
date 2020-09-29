@@ -1,0 +1,71 @@
+---
+- name: node setting
+  command: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
+- name: install nodejs
+  apt:
+    name: nodejs 
+
+- name: only upgrade
+  apt:
+    only_upgrade: yes
+
+- name: install pip3
+  apt:
+    name: "{{ item }}" 
+    state: present
+  with_items:
+  - python3-pip
+  - git
+  - libgtk2.0-dev
+  - curl
+ 
+- name: curl nodejs
+  command: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - 
+
+- name: install nodejs
+  apt:
+    name: nodejs
+    state: present
+
+- name: pip3 install food-recognition package dependency
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+  with_items:
+  - numpy==1.16.0
+  - tensorflow==1.13.2
+  - keras==2.2.5
+  - tqdm
+  - scikit-build
+  - cmake
+  - opencv-python
+  - opencv-contrib-python
+
+- name: git clone project
+  git:
+   repo: 'https://github.com/wgkevin666/ai08finallyproject'
+   dest: /opt/ai08finallyproject/
+
+   #- name: git clone darknet
+   #  git:
+   #   repo: 'https://github.com/pjreddie/darknet'
+   #   dest: /opt/darknet
+
+- name: add env
+  lineinfile:
+    path: /etc/environment
+    line: QT_X11_NO_MITSHM=1
+    state: present
+ 
+- name: pip3 install speech dependency
+  pip:
+    name: "{{ item }}"
+    executable: pip3
+  with_items:
+  - SpeechRecognition 
+  - jieba
+  - gTTS
+  - pygame
+  - PyAudio 
+
