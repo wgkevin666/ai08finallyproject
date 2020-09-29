@@ -3,3 +3,5 @@ node_modules/*
 .vscode
 public/img-uploads
 public/img-downloads/
+*/.DS_Store
+.DS_Store

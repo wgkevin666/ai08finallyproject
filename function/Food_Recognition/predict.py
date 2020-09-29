@@ -145,24 +145,19 @@ def draw_receipt(image, boxes, labels, entrees, obj_thresh):
 
     # draw total expense
     total_exp = 0
-    cv2.putText(img=image_with_receipt, text='====== Expense ======', org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=2)
+    cv2.putText(img=image_with_receipt, text='====== Expense ======', org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 0, 0), thickness=2)
     if(len(detected_entrees) > 0):
         y += row_height
         for detected_entree in detected_entrees:
-            
-            food_item = detected_entree
-            print(food_item)
-            print(type(food_item))
-            
             price = entrees[detected_entree]['price']
             total_exp += price
-            cv2.putText(img=image_with_receipt, text='{0}'.format(detected_entree), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=2)
-            cv2.putText(img=image_with_receipt, text='{0:>29}'.format('$' + str(price)), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=2)
+            cv2.putText(img=image_with_receipt, text='{0}'.format(detected_entree), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 0, 0), thickness=2)
+            cv2.putText(img=image_with_receipt, text='{0:>29}'.format('$' + str(price)), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 0, 0))
             y += row_height
     y += row_height
-    
-    cv2.putText(img=image_with_receipt, text='{0}'.format('TOTAL'), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=5)
-    cv2.putText(img=image_with_receipt, text='{0:>29}'.format('$' + str(total_exp)), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=3)
+   
+    cv2.putText(img=image_with_receipt, text='{0}'.format('TOTAL'), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 0, 0), thickness=5)
+    cv2.putText(img=image_with_receipt, text='{0:>29}'.format('$' + str(total_exp)), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 0, 0), thickness=3)
     
     # draw nutrition facts
     total_fat = 0
@@ -178,21 +173,9 @@ def draw_receipt(image, boxes, labels, entrees, obj_thresh):
         y += row_height
         for detected_entree in detected_entrees:
             nutrition_fact = entrees[detected_entree]
-            print(nutrition_fact)
-            print(type(nutrition_fact))
-            
             total_fat += nutrition_fact['fat']
-            print(total_fat)
-            print(type(total_fat))
-            
             total_carbs += nutrition_fact['carbohydrate']
-            print(total_carbs)
-            print(type(total_carbs))
-            
             total_protein += nutrition_fact['protein']
-            print(total_protein)
-            print(type(total_protein))
-            
             cv2.putText(img=image_with_receipt, text='{0}({1}{2})'.format(detected_entree, str(nutrition_fact['serving_amount']), nutrition_fact['amount_unit']), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=2)
             y += row_height
             cv2.putText(img=image_with_receipt, text='{0:>9}{1:>9}{2:>9}'.format(str(nutrition_fact['fat']) + 'g', str(nutrition_fact['carbohydrate']) + 'g', str(nutrition_fact['protein']) + 'g'), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=2)
@@ -207,6 +190,21 @@ def draw_receipt(image, boxes, labels, entrees, obj_thresh):
     total_cal = 9 * total_fat + 4 * total_carbs + 4 * total_protein
     cv2.putText(img=image_with_receipt, text='{0:>29}'.format(round(total_cal, 1)), org=(x, y), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1e-3 * image.shape[0], color=(0, 255, 0), thickness=3)
     
+   
+    total_fat = round(total_fat, 1) 
+    total_carbs	= round(total_carbs, 1) 
+    total_protein = round(total_protein, 1) 
+    total_cal = round(total_cal, 1) # 4 variables that contain .1f
+
+    data = {'total_fat': total_fat, 'total_carbs': total_carbs, 'total_protein': total_protein, 'total_cal': total_cal} #dictionary
+
+    
+    print(total_cal , total_protein, total_fat, total_carbs) 
+    print(data)
+
+#    with open('nutrition.json', 'w', encoding='utf-8') as f:
+#        json.dump(data, f) #JSON object
+
     return image_with_receipt
 
 if __name__ == '__main__':
