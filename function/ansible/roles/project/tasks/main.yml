@@ -67,5 +67,11 @@
   - jieba
   - gTTS
   - pygame
-  - PyAudio 
 
+- name: replace pip3 PyAudio
+  apt:
+    name: "{{ item }}" 
+    state: present
+  with_items:
+  - python3-pyaudio
+  - portaudio19-dev
