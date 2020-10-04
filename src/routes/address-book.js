@@ -1,7 +1,12 @@
 const express = require('express');
+const moment = require('moment-timezone');
 const router = express.Router();
 
 const db = require(__dirname + '/../db_connect2');
+
+router.get('/add', (req, res)=>{
+    res.render('/address-book/add');
+});
 
 router.get('/list/:page?', async (req, res)=>{
     const perPage = 5; //每頁顯示幾筆
@@ -32,9 +37,12 @@ router.get('/list/:page?', async (req, res)=>{
         return res.redirect('/address-book/list' + output.totalPages);
     }
 
-    const sql = `SELECT * FROM address_book LIMIT ${(page-1)*perPage}, ${perPage}`;
+    const sql = `SELECT * FROM address_book ORDER BY sid DESC LIMIT ${(page-1)*perPage}, ${perPage}`;
     console.log('sql:', sql); //可檢查sql有沒有錯
     const [result] = await db.query(sql);
+    result.forEach((el)=>{
+        el.birthday = moment(el.birthday).format('YYYY-MM-DD'); //包成moment的物件
+    });
     output.rows = result;
 
     //res.json(result);  看結果
