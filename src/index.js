@@ -12,6 +12,11 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//custom middleware
+app.use((req, res, next)=>{
+    res.locals.pageName = '';
+    next();
+});
 
 
 const session = require('express-session');
@@ -31,6 +36,7 @@ app.use('/admins', require(__dirname + '/routes/admin2'));
 // });
 
 app.get("/", function (request, response) {
+    //res.locals.pageName = 'home';
     //response.render("main",{name:"Weisung"});
     response.render("main");
     //response.send("<h2>Hello Express Success</h2>");

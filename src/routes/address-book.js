@@ -5,10 +5,33 @@ const router = express.Router();
 const db = require(__dirname + '/../db_connect2');
 
 router.get('/add', (req, res)=>{
+    res.locals.pageName = 'address-book-add';
     res.render('/address-book/add');
+});
+router.post('/add', async (req, res)=>{
+    const email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    const output = {
+        success: false,
+        body: req.body //表單的資料會放在裡面
+    };
+    //後端檢查欄位格式
+    if(! email_pattern.test(req.body.email)){
+        output.error = 'Email 格式不符'
+        return res.json(output); //到這邊結束 
+    }
+
+    const sql = "INSERT INTO `address_book` SET ?";
+    const [result] = await db.query(sql, [req.body]);
+    //if(result.affectedRows){
+    if(result.affectedRows===1 && result.insertId){
+        output.success = true;
+    }
+    output.result = result;
+    res.json(output);
 });
 
 router.get('/list/:page?', async (req, res)=>{
+    res.locals.pageName = 'address-book-list';
     const perPage = 5; //每頁顯示幾筆
     let page = parseInt(req.params.page) || 1; //若無法專換會變成NaN看成false,預設值1
     const output = {
