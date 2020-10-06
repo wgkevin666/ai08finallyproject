@@ -1,15 +1,58 @@
 const express = require('express');
 const moment = require('moment-timezone');
 const router = express.Router();
+const email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
 const db = require(__dirname + '/../db_connect2');
+
+router.get('/edit/:sid', async (req, res)=>{
+    const sql = "SELECT * FROM `address_book` WHERE sid=?";
+    const [result] = await db.query(sql, [req.params.sid]);
+    if(result.length){
+        result[0].birthday = moment(result[0].birthday).format('YYYY-MM-DD');
+        res.render('/address-book/edit', {row: result[0]});
+    } else {
+        res.redirect('/address-book/list');
+    }
+    
+});
+router.post('/edit', async (req, res)=>{
+    const output = {
+        success: false,
+        body: req.body //表單的資料會放在裡面
+    };
+    //後端檢查欄位格式
+    if(! email_pattern.test(req.body.email)){
+        output.error = 'Email 格式不符'
+        return res.json(output); //到這邊結束 
+    }
+    const updateData = { ...req.body }; //代表將req.body展開 類似於複製
+    const sid = updateData.sid; 
+    delete updateData.sid; //刪除屬性
+    const sql = "UPDATE `address_book` SET ? WHERE sid=?";
+    const [result] = await db.query(sql, [updateData, sid]);
+    if(result.changedRows===1){ //有變更才有
+        output.success = true;
+    }
+    output.result = result;
+    res.json(output);
+});
+
+router.get('/del/:sid', async (req, res)=>{
+    const sql = "DELETE FROM `address_book` WHERE sid=?";
+    const [result] = await db.query(sql, [req.params.sid]);
+    if(req.get('Referer')){
+        res.redirect( req.get('Referer') );
+    } else {
+        res.redirect('/address-book/list');
+    }
+});
 
 router.get('/add', (req, res)=>{
     res.locals.pageName = 'address-book-add';
     res.render('/address-book/add');
 });
 router.post('/add', async (req, res)=>{
-    const email_pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     const output = {
         success: false,
         body: req.body //表單的資料會放在裡面
